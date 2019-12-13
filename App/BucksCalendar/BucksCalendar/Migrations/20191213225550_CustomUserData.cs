@@ -7,12 +7,12 @@ namespace BucksCalendar.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Mobile",
+                name: "Name",
                 table: "AspNetUsers",
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "Name",
+                name: "Role",
                 table: "AspNetUsers",
                 nullable: true);
         }
@@ -20,11 +20,11 @@ namespace BucksCalendar.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Mobile",
+                name: "Name",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "Name",
+                name: "Role",
                 table: "AspNetUsers");
         }
     }
