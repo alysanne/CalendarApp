@@ -10,6 +10,6 @@ namespace BucksCalendar.Areas.Identity.Data
     public class CalendarUser : IdentityUser
     {
         public string Name { get; set; }
-        public string Mobile { get; set; }
+        public string Role { get; set; }
     }
 }

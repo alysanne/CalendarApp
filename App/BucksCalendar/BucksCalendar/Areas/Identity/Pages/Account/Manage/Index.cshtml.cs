@@ -37,14 +37,15 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
             [DataType(DataType.Text)]
             [Display(Name = "Full name")]
             public string Name { get; set; }
-
+            
             [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Role")]
+            public string Role { get; set; }
+
+            [Phone]
             [Display(Name = "Mobile phone")]
             [DataType(DataType.Text)]
-            public string Mobile { get; set; }
-            
-            [Phone]
-            [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
         }
 
@@ -58,7 +59,7 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 Name = user.Name,
-                Mobile = user.Mobile,
+                Role = user.Role,
                 PhoneNumber = phoneNumber
             };
         }
@@ -105,9 +106,9 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
                 user.Name = Input.Name;
             }
 
-            if (Input.Mobile != user.Mobile)
+            if (Input.Role != user.Role)
             {
-                user.Mobile = Input.Mobile;
+                user.Role = Input.Role;
             }
 
             await _userManager.UpdateAsync(user);

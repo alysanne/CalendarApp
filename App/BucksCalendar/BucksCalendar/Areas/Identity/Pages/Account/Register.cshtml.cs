@@ -47,19 +47,23 @@ namespace BucksCalendar.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
-            public string Email { get; set; }
-            
-            [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Full name")]
             public string Name { get; set; }
+            
+            [Required]
+            [Display(Name = "Role")]
+            public string Role { get; set; }
+            
+            [Required]
+            [EmailAddress]
+            [Display(Name = "Email")]
+            public string Email { get; set; }
 
             [Required]
             [Display(Name = "Mobile phone")]
             [DataType(DataType.Text)]
-            public string Mobile { get; set; }
+            public string PhoneNumber { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -86,10 +90,11 @@ namespace BucksCalendar.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new CalendarUser { 
-                    UserName = Input.Email, 
+                    UserName = Input.Email,
+                    Role = Input.Role,
                     Email = Input.Email, 
                     Name = Input.Name,
-                    Mobile = Input.Mobile
+                    PhoneNumber = Input.PhoneNumber
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
