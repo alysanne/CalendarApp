@@ -9,5 +9,7 @@ namespace BucksCalendar.Areas.Identity.Data
     // Add profile data for application users by adding properties to the CalendarUser class
     public class CalendarUser : IdentityUser
     {
+        public string Name { get; set; }
+        public string Mobile { get; set; }
     }
 }
