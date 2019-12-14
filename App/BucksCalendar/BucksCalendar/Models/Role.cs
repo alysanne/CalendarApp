@@ -2,6 +2,7 @@ namespace BucksCalendar.Models
 {
     public class Role
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
+        public string RoleType { get; set; }
     }
 }

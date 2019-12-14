@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using BucksCalendar.Areas.Identity.Data;
+using BucksCalendar.Areas.Identity.Validations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -48,32 +49,38 @@ namespace BucksCalendar.Areas.Identity.Pages.Account
         {
             [Required]
             [DataType(DataType.Text)]
+            [StringLength(50)]
             [Display(Name = "Full name")]
             public string Name { get; set; }
             
             [Required]
+            [RoleAttribute]
+            [DataType(DataType.Text)]
+            [RegularExpression(@"^(Teacher|Student)$", ErrorMessage = "Please select a valid role")]
             [Display(Name = "Role")]
             public string Role { get; set; }
             
             [Required]
             [EmailAddress]
+            [StringLength(50)]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
-            [Display(Name = "Mobile phone")]
+            [Phone]
             [DataType(DataType.Text)]
+            [RegularExpression(@"^07\d{9}$", ErrorMessage = "Please provide a valid mobile phone with no spaces")]
+            [Display(Name = "Mobile phone")]
             public string PhoneNumber { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Confirm password")]
             public string ConfirmPassword { get; set; }
         }
 
