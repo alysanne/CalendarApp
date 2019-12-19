@@ -56,30 +56,30 @@ namespace BucksCalendar.Areas.Identity.Pages.Account
             [Required]
             [RoleAttribute]
             [DataType(DataType.Text)]
-            [RegularExpression(@"^(Teacher|Student)$", ErrorMessage = "Please select a valid role")]
+            [RegularExpression(@"^(Teacher|Student)$", ErrorMessage = "Select a valid role.")]
             [Display(Name = "Role")]
             public string Role { get; set; }
             
             [Required]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Provide a valid email address.")]
             [StringLength(50)]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
             [Phone]
             [DataType(DataType.Text)]
-            [RegularExpression(@"^07\d{9}$", ErrorMessage = "Please provide a valid mobile phone with no spaces")]
+            [RegularExpression(@"^07\d{9}$", ErrorMessage = "UK mobile phone with no spaces.")]
             [Display(Name = "Mobile phone")]
             public string PhoneNumber { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Must be at least {2} characters.", MinimumLength = 6)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Passwords do not match.")]
             [Display(Name = "Confirm password")]
             public string ConfirmPassword { get; set; }
         }

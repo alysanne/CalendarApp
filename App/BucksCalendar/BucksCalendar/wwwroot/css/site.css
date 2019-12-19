@@ -74,6 +74,19 @@ body {
   background-color: #404460;
 }
 
+.page-title {
+  margin: 35px 0 15px 0;
+  color: #ffffff;
+  font-family: "Quicksand", sans-serif;
+}
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 
 /* Navbar styles
 -------------------------------------------------- */
@@ -134,4 +147,79 @@ body {
   font-size: 22px;
   font-weight: 300;
   margin-left: 5px;
+}
+
+/* Form styles
+-------------------------------------------------- */
+
+.form-card {
+  width: 600px;
+  height: 385px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin: auto;
+  padding: 35px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.form-fields {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  flex: 0.45;
+  justify-content: flex-start;
+  height: 250px;
+}
+
+div.form-group {
+  margin-bottom: 0;
+}
+
+.form-bottom-section {
+  display: flex;
+  flex-direction: column;
+}
+
+form .btn {
+  width: 75px;
+  height: 35px;
+  border: none;
+  background-color: #f85c6a;
+  align-self: flex-end;
+}
+
+form .btn:hover, form .btn:active {
+  background-color: #f85c6aee !important;
+}
+
+.form-redirect-text {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.redirect-link {
+  color: #00b3Ba;
+  text-decoration: underline;
+}
+
+.redirect-link:hover {
+  color: #009aa1;
+}
+
+.field-validation-error {
+  min-height: 22px;
+  display: block;
+  margin-bottom: 2px;
+  font-size: 14px;
 }
