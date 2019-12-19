@@ -29,15 +29,11 @@ a {
 html {
   font-size: 14px;
 }
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
 
 .border-top {
   border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
   border-bottom: 1px solid #e5e5e5;
 }
@@ -62,10 +58,80 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+/* General page styles
+-------------------------------------------------- */
+
+body {
+  background-color: #404460;
+}
+
+
+/* Navbar styles
+-------------------------------------------------- */
+
+.navbar-divider {
+  margin: auto;
+  height: 1px;
+  width: calc(100% - 160px);
+  background-color: #ffffff;
+}
+
+.navbar-wrapper {
+  width: calc(100% - 160px);
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .navbar-divider {
+    width: calc(100% - 120px);
+  }
+
+  .navbar-wrapper {
+    width: calc(100% - 120px);
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-divider {
+    width: calc(100% - 60px);
+  }
+
+  .navbar-wrapper {
+    width: calc(100% - 60px);
+  }
+}
+
+@media (max-width: 450px) {
+  #app-name {
+    display: none;
+  }
+}
+
+.navbar-nav .nav-item a.nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Quicksand', sans-serif;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.navbar-nav .nav-item a.nav-link:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+#app-name {
+  text-transform: lowercase;
+  font-family: 'Raleway', sans-serif;
+  font-size: 22px;
+  font-weight: 300;
+  margin-left: 5px;
 }
