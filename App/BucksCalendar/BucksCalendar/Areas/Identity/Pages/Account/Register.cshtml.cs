@@ -47,7 +47,7 @@ namespace BucksCalendar.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "This field is required.")]
             [DataType(DataType.Text)]
             [StringLength(50)]
             [Display(Name = "Full name")]
@@ -61,20 +61,20 @@ namespace BucksCalendar.Areas.Identity.Pages.Account
             public string Role { get; set; }
             
             [Required]
-            [EmailAddress(ErrorMessage = "Provide a valid email address.")]
+            [EmailAddress(ErrorMessage = "Provide a valid email.")]
             [StringLength(50)]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
             [Phone]
             [DataType(DataType.Text)]
-            [RegularExpression(@"^07\d{9}$", ErrorMessage = "UK mobile phone with no spaces.")]
+            [RegularExpression(@"^07\d{9}$", ErrorMessage = "UK mobile with no spaces.")]
             [Display(Name = "Mobile phone")]
             public string PhoneNumber { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
-            [StringLength(100, ErrorMessage = "Must be at least {2} characters.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Minimum {2} characters.", MinimumLength = 6)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
