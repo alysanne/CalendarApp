@@ -209,12 +209,12 @@ form .btn:hover, form .btn:active {
 }
 
 .redirect-link {
-  color: #00b3Ba;
+  color: #008196;
   text-decoration: underline;
 }
 
 .redirect-link:hover {
-  color: #009aa1;
+  color: #005e6e;
 }
 
 .field-validation-error {
