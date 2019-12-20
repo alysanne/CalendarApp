@@ -186,12 +186,30 @@ div.form-group {
   margin-bottom: 0;
 }
 
+.dropdown .btn {
+  background-color: #ffffff !important;
+  border: 1px solid #ced4da;
+  color: #495057;
+}
+
+.dropdown-menu .dropdown-item {
+  color: #495057;
+}
+
+.dropdown-menu .dropdown-item.active {
+  background-color: #eeeeee;
+}
+
+.dropdown-menu .dropdown-item:active {
+  background-color: #eeeeee;
+}
+
 .form-bottom-section {
   display: flex;
   flex-direction: column;
 }
 
-form .btn {
+form .btn[type="submit"] {
   width: 75px;
   height: 35px;
   border: none;
@@ -199,7 +217,7 @@ form .btn {
   align-self: flex-end;
 }
 
-form .btn:hover, form .btn:active {
+form .btn[type="submit"]:hover, form .btn[type="submit"]:active {
   background-color: #f85c6aee !important;
 }
 
@@ -218,6 +236,8 @@ form .btn:hover, form .btn:active {
   margin-bottom: 2px;
   font-size: 14px;
 }
+
+/* Responsive form */
 
 @media (max-width: 768px) {
   .form-card {
