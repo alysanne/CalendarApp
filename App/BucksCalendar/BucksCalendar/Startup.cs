@@ -42,6 +42,7 @@ namespace BucksCalendar
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseRouting();
 
