@@ -7,7 +7,7 @@
 <div class="page-content">
     <h4 class="page-title">Create an account</h4>
     <div class="form-card">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form form-card-signup">
             <div class="form-fields">
                 <div class="form-column">
                     <div class="form-group">
@@ -63,7 +63,7 @@
                 <button type="submit" class="btn btn-primary">Sign up</button>
                 <div class="form-redirect-text">
                     <span>Already have an account? </span>
-                    <a asp-area="Identity" asp-page="/Account/Login" class="redirect-link">Log in here!</a>
+                    <a asp-area="Identity" asp-page="/Account/Login" class="redirect-link redirect-link-signup">Log in here!</a>
                 </div>
             </div>
         </form>

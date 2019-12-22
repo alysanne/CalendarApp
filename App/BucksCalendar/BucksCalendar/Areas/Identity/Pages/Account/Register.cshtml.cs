@@ -53,14 +53,14 @@ namespace BucksCalendar.Areas.Identity.Pages.Account
             [Display(Name = "Full name")]
             public string Name { get; set; }
             
-            [Required]
+            [Required(ErrorMessage = "This field is required.")]
             [RoleAttribute]
             [DataType(DataType.Text)]
             [RegularExpression(@"^(Teacher|Student)$", ErrorMessage = "Select a valid role.")]
             [Display(Name = "Role")]
             public string Role { get; set; }
             
-            [Required]
+            [Required(ErrorMessage = "This field is required.")]
             [EmailAddress(ErrorMessage = "Provide a valid email.")]
             [StringLength(50)]
             [Display(Name = "Email")]
@@ -72,14 +72,14 @@ namespace BucksCalendar.Areas.Identity.Pages.Account
             [Display(Name = "Mobile phone")]
             public string PhoneNumber { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "This field is required.")]
             [DataType(DataType.Password)]
             [StringLength(100, ErrorMessage = "Minimum {2} characters.", MinimumLength = 6)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Compare("Password", ErrorMessage = "Passwords do not match.")]
+            [Compare("Password", ErrorMessage = "Passwords don't match.")]
             [Display(Name = "Confirm password")]
             public string ConfirmPassword { get; set; }
         }

@@ -87,6 +87,13 @@ body {
   justify-content: center;
 }
 
+a, a:active {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-item, .nav-item:active {
+  -webkit-tap-highlight-color: transparent;
+}
 
 /* Navbar styles
 -------------------------------------------------- */
@@ -153,19 +160,29 @@ body {
 -------------------------------------------------- */
 
 .form-card {
-  width: 600px;
-  height: 385px;
   background-color: #ffffff;
   border-radius: 15px;
   margin: 25px auto;
   padding: 35px;
-}
+  -webkit-box-shadow: 7px 7px 15px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 7px 7px 15px 0px rgba(0,0,0,0.5);
+  box-shadow: 7px 7px 15px 0px rgba(0,0,0,0.5);}
 
 .form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+}
+
+.form-card-login {
+  width: 350px;
+  height: 390px;
+}
+
+.form-card-signup {
+  width: 600px;
+  height: 385px;
 }
 
 .form-fields {
@@ -180,6 +197,10 @@ body {
   flex: 0.45;
   justify-content: flex-start;
   height: 255px;
+}
+
+.form-column-login {
+  flex: 1;
 }
 
 div.form-group {
@@ -215,6 +236,7 @@ form .btn[type="submit"] {
   border: none;
   background-color: #f85c6a;
   align-self: flex-end;
+  margin-bottom: 5px;
 }
 
 form .btn[type="submit"]:hover, form .btn[type="submit"]:active {
@@ -237,10 +259,15 @@ form .btn[type="submit"]:hover, form .btn[type="submit"]:active {
   font-size: 14px;
 }
 
+div.form-errors ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 /* Responsive form */
 
 @media (max-width: 768px) {
-  .form-card {
+  .form-card-signup {
     height: 640px;
     width: 400px;
   }
@@ -255,17 +282,13 @@ form .btn[type="submit"]:hover, form .btn[type="submit"]:active {
 }
 
 @media (max-width: 576px) {
-  .form-card {
+  .form-card-signup {
     height: 670px;
     width: 300px;
   }
   
-  .redirect-link {
+  .redirect-link-signup {
     display: block;
-  }
-  
-  .form-redirect-text {
-    margin-top: 10px;
   }
   
   .field-validation-error {
@@ -274,7 +297,11 @@ form .btn[type="submit"]:hover, form .btn[type="submit"]:active {
 }
 
 @media (max-width: 380px) {
-  .form-card {
+  .form-card-signup {
+    width: 250px;
+  }
+
+  .form-card-login {
     width: 250px;
   }
 }
