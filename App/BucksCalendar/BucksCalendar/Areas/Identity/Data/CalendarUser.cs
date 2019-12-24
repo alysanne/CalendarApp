@@ -11,5 +11,6 @@ namespace BucksCalendar.Areas.Identity.Data
     {
         public string Name { get; set; }
         public string Role { get; set; }
+        public byte[] Image { get; set; }
     }
 }
