@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BucksCalendar.Areas.Identity.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -24,6 +26,8 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
         }
 
         public string Username { get; set; }
+        
+        public string ProfileImage { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -47,6 +51,9 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Mobile phone")]
             [DataType(DataType.Text)]
             public string PhoneNumber { get; set; }
+            
+            [Display(Name = "Profile Picture")]
+            public IFormFile Image { get; set; }
         }
 
         private async Task LoadAsync(CalendarUser user)
@@ -55,6 +62,9 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
+            
+            var base64Img = Convert.ToBase64String(user.Image);
+            ProfileImage = $"data:image/jpg;base64,{base64Img}";
 
             Input = new InputModel
             {
@@ -109,6 +119,22 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
             if (Input.Role != user.Role)
             {
                 user.Role = Input.Role;
+            }
+
+            using (var memoryStream = new MemoryStream())
+            {
+                await Input.Image.CopyToAsync(memoryStream);
+
+                // Upload the file if less than 2 MB
+                if (memoryStream.Length < 2097152)
+                {
+                    user.Image = memoryStream.ToArray();
+                }
+                else
+                {
+                    StatusMessage = "Please upload a smaller image (max 2MB)";
+                    return RedirectToPage();
+                }
             }
 
             await _userManager.UpdateAsync(user);

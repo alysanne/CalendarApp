@@ -305,3 +305,10 @@ div.form-errors ul {
     width: 250px;
   }
 }
+
+/* Profile styles
+-------------------------------------------------- */
+
+#profile-image {
+  width: 200px;
+}
