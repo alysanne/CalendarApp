@@ -9,5 +9,7 @@ namespace BucksCalendar.Models
         public bool NotifyBySMS { get; set; }
         public bool NotifyByEmail { get; set; }
         public DateTime ScheduledFor { get; set; }
+        
+        public Event Event { get; set; }
     }
 }

@@ -8,5 +8,8 @@ namespace BucksCalendar.Models
         public int NotificationID { get; set; }
         public string NotificationType { get; set; }
         public DateTime DateSent { get; set; }
+        
+        public Notification Notification { get; set; }
+        public Event Event { get; set; }
     }
 }

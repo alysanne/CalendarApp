@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using BucksCalendar.Areas.Identity.Data;
 
 namespace BucksCalendar.Models
 {
@@ -12,5 +14,10 @@ namespace BucksCalendar.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public bool NotifyUsers { get; set; }
+        
+        public Category Category { get; set; }
+        public CalendarUser User { get; set; }
+        public Notification Notification { get; set; }
+        public ICollection<NotificationLog> NotificationLogs { get; set; }
     }
 }
