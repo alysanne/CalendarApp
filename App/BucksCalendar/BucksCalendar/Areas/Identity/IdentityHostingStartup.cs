@@ -1,5 +1,6 @@
 using System;
 using BucksCalendar.Areas.Identity.Data;
+using BucksCalendar.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -22,11 +23,11 @@ namespace BucksCalendar.Areas.Identity
                 connectionStringBuilder.Password = context.Configuration["CalendarDbPassword"];
                 _connectionString = connectionStringBuilder.ConnectionString;
                 
-                services.AddDbContext<BucksCalendarIdentityDbContext>(options =>
+                services.AddDbContext<DatabaseContext>(options =>
                     options.UseSqlServer(_connectionString));
 
                 services.AddDefaultIdentity<CalendarUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<BucksCalendarIdentityDbContext>();
+                    .AddEntityFrameworkStores<DatabaseContext>();
             });
         }
     }
