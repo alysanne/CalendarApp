@@ -33,6 +33,30 @@ namespace BucksCalendar.Data
             modelBuilder.Entity<Role>().ToTable("Role");
             modelBuilder.Entity<Category>().ToTable("Category");
             modelBuilder.Entity<Event>().ToTable("Event");
+            
+            // Add predefined values for categories
+            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 1, Type = Categories.Lecture});
+            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 2, Type = Categories.Deadline});
+            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 3, Type = Categories.WFH});
+            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 4, Type = Categories.AnnualLeave});
+            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 5, Type = Categories.BankHoliday});
+            
+            // Add predefined values for roles
+            modelBuilder.Entity<Role>().HasData(new Role
+            {
+                RoleID = 1, Type = BucksCalendar.Models.Roles.Admin, CanAddLecture = true, CanAddDeadline = true,
+                CanAddWFH = true, CanAddAnnualLeave = true, CanAddBankHolidays = true
+            });
+            modelBuilder.Entity<Role>().HasData(new Role
+            {
+                RoleID = 2, Type = BucksCalendar.Models.Roles.Teacher, CanAddLecture = true, CanAddDeadline = true,
+                CanAddWFH = true, CanAddAnnualLeave = true, CanAddBankHolidays = true
+            });
+            modelBuilder.Entity<Role>().HasData(new Role
+            {
+                RoleID = 3, Type = BucksCalendar.Models.Roles.Student, CanAddLecture = false, CanAddDeadline = false,
+                CanAddWFH = true, CanAddAnnualLeave = true, CanAddBankHolidays = false
+            });
         }
     }
 }
