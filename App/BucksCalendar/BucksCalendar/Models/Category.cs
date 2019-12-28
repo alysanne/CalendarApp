@@ -9,7 +9,7 @@ namespace BucksCalendar.Models
     }
     public class Category
     {
-        public string CategoryID { get; set; }
+        public int CategoryID { get; set; }
         public Categories Type { get; set; }
     }
 }
