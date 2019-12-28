@@ -1,0 +1,63 @@
+@page
+@model BucksCalendar.Pages.Calendar.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Event</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Event.UserID" class="control-label"></label>
+                <select asp-for="Event.UserID" class ="form-control" asp-items="ViewBag.UserID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.CategoryID" class="control-label"></label>
+                <input asp-for="Event.CategoryID" class="form-control" />
+                <span asp-validation-for="Event.CategoryID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.StartDateTime" class="control-label"></label>
+                <input asp-for="Event.StartDateTime" class="form-control" />
+                <span asp-validation-for="Event.StartDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.EndDateTime" class="control-label"></label>
+                <input asp-for="Event.EndDateTime" class="form-control" />
+                <span asp-validation-for="Event.EndDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.Title" class="control-label"></label>
+                <input asp-for="Event.Title" class="form-control" />
+                <span asp-validation-for="Event.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.Description" class="control-label"></label>
+                <input asp-for="Event.Description" class="form-control" />
+                <span asp-validation-for="Event.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Event.NotifyUsers" /> @Html.DisplayNameFor(model => model.Event.NotifyUsers)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
