@@ -19,7 +19,7 @@ namespace BucksCalendar.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                var connectionStringBuilder = new SqlConnectionStringBuilder(context.Configuration.GetConnectionString("BucksCalendarIdentityDbContextConnection"));
+                var connectionStringBuilder = new SqlConnectionStringBuilder(context.Configuration.GetConnectionString("BucksCalendarDatabaseConnection"));
                 connectionStringBuilder.Password = context.Configuration["CalendarDbPassword"];
                 _connectionString = connectionStringBuilder.ConnectionString;
                 
