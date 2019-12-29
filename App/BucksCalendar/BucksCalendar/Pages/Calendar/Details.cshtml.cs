@@ -29,7 +29,7 @@ namespace BucksCalendar.Pages.Calendar
             }
 
             Event = await _context.Events
-                .Include(e => e.User).FirstOrDefaultAsync(m => m.EventID == id);
+                .Include(e => e.User).Include(e => e.Category).FirstOrDefaultAsync(m => m.EventID == id);
 
             if (Event == null)
             {
