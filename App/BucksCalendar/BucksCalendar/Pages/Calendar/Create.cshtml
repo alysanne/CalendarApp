@@ -1,4 +1,5 @@
 @page
+@using BucksCalendar.Models
 @model BucksCalendar.Pages.Calendar.CreateModel
 
 @{
@@ -14,38 +15,51 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Event.UserID" class="control-label"></label>
-                <select asp-for="Event.UserID" class ="form-control" asp-items="ViewBag.UserID"></select>
+                <label asp-for="Input.CategoryID" class="control-label"></label>
+                <select asp-for="Input.CategoryID" class="form-control">
+                    <option value="1">@Categories.Lecture</option>
+                    <option value="2">@Categories.Deadline</option>
+                    <option value="3">@Categories.WFH</option>
+                    <option value="4">@Categories.AnnualLeave</option>
+                    <option value="5">@Categories.BankHoliday</option>
+                </select>
+                <span asp-validation-for="Input.CategoryID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Event.CategoryID" class="control-label"></label>
-                <input asp-for="Event.CategoryID" class="form-control" />
-                <span asp-validation-for="Event.CategoryID" class="text-danger"></span>
+                <label asp-for="Input.AllDayEvent" class="control-label"></label>
+                <input asp-for="Input.AllDayEvent" class="form-control" />
+                <span asp-validation-for="Input.AllDayEvent" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Event.StartDateTime" class="control-label"></label>
-                <input asp-for="Event.StartDateTime" class="form-control" />
-                <span asp-validation-for="Event.StartDateTime" class="text-danger"></span>
+                <label asp-for="Input.StartDateTime" class="control-label"></label>
+                <input asp-for="Input.StartDateTime" class="form-control" />
+                <span asp-validation-for="Input.StartDateTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Event.EndDateTime" class="control-label"></label>
-                <input asp-for="Event.EndDateTime" class="form-control" />
-                <span asp-validation-for="Event.EndDateTime" class="text-danger"></span>
+                <label asp-for="Input.EndDateTime" class="control-label"></label>
+                <input asp-for="Input.EndDateTime" class="form-control" />
+                <span asp-validation-for="Input.EndDateTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Event.Title" class="control-label"></label>
-                <input asp-for="Event.Title" class="form-control" />
-                <span asp-validation-for="Event.Title" class="text-danger"></span>
+                <label asp-for="Input.Title" class="control-label"></label>
+                <input asp-for="Input.Title" class="form-control" />
+                <span asp-validation-for="Input.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Event.Description" class="control-label"></label>
-                <input asp-for="Event.Description" class="form-control" />
-                <span asp-validation-for="Event.Description" class="text-danger"></span>
+                <label asp-for="Input.Description" class="control-label"></label>
+                <input asp-for="Input.Description" class="form-control" />
+                <span asp-validation-for="Input.Description" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Event.NotifyUsers" /> @Html.DisplayNameFor(model => model.Event.NotifyUsers)
+                    <input class="form-check-input" asp-for="Input.NotifyBySMS" /> @Html.DisplayNameFor(model => model.Input.NotifyBySMS)
+                    <input class="form-check-input" asp-for="Input.NotifyByEmail" /> @Html.DisplayNameFor(model => model.Input.NotifyBySMS)
                 </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.ScheduledFor" class="control-label"></label>
+                <input asp-for="Input.ScheduledFor" class="form-control" />
+                <span asp-validation-for="Input.ScheduledFor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
