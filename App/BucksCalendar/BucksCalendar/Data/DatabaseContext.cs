@@ -17,11 +17,11 @@ namespace BucksCalendar.Data
         }
 
         public DbSet<Event> Events { get; set; }
-        public DbSet<Category> Category { get; set; }
-        public DbSet<Role> Role { get; set; }
-        public DbSet<Notification> Notification { get; set; }
-        public DbSet<NotificationLog> NotificationLog { get; set; }
-        public DbSet<UserPreference> UserPreference { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<NotificationLog> NotificationLogs { get; set; }
+        public DbSet<UserPreference> UserPreferences { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,11 +35,11 @@ namespace BucksCalendar.Data
             modelBuilder.Entity<Event>().ToTable("Event");
             
             // Add predefined values for categories
-            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 1, Type = Categories.Lecture});
-            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 2, Type = Categories.Deadline});
-            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 3, Type = Categories.WFH});
-            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 4, Type = Categories.AnnualLeave});
-            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 5, Type = Categories.BankHoliday});
+            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 1, Type = BucksCalendar.Models.Categories.Lecture});
+            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 2, Type = BucksCalendar.Models.Categories.Deadline});
+            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 3, Type = BucksCalendar.Models.Categories.WFH});
+            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 4, Type = BucksCalendar.Models.Categories.AnnualLeave});
+            modelBuilder.Entity<Category>().HasData(new Category {CategoryID = 5, Type = BucksCalendar.Models.Categories.BankHoliday});
             
             // Add predefined values for roles
             modelBuilder.Entity<Role>().HasData(new Role
