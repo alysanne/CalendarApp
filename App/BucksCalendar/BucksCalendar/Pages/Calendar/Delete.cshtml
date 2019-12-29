@@ -13,19 +13,25 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.CategoryID)
+            @Html.DisplayNameFor(model => model.Event.Category)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.CategoryID)
+            @Html.DisplayFor(model => model.Event.Category.Type)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.StartDateTime)
+            All day event
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.AllDayEvent)
+        </dd>
+        <dt class="col-sm-2">
+            Start date
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Event.StartDateTime)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.EndDateTime)
+            End date
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Event.EndDateTime)
@@ -43,10 +49,28 @@
             @Html.DisplayFor(model => model.Event.Description)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.User)
+            Author
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.User.Id)
+            @Html.DisplayFor(model => model.Event.User.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            Notify by email
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.Notification.NotifyByEmail)
+        </dd>
+        <dt class="col-sm-2">
+            Notify by SMS
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.Notification.NotifyBySMS)
+        </dd>
+        <dt class="col-sm-2">
+            Scheduled for
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.Notification.ScheduledFor)
         </dd>
     </dl>
     
