@@ -50,10 +50,9 @@ namespace BucksCalendar.Pages.Calendar
             [Display(Name = "Start date")]
             public DateTime StartDateTime { get; set; }
 
-            [Required(ErrorMessage = "This field is required.")]
             [DataType(DataType.DateTime)]
             [Display(Name = "End date")]
-            public DateTime EndDateTime { get; set; }
+            public DateTime? EndDateTime { get; set; }
             
             [Display(Name = "Notify by SMS")]
             public bool NotifyBySMS { get; set; }
@@ -63,7 +62,7 @@ namespace BucksCalendar.Pages.Calendar
             
             [DataType(DataType.DateTime)]
             [Display(Name = "Scheduled for")]
-            public DateTime ScheduledFor { get; set; }
+            public DateTime? ScheduledFor { get; set; }
         }
 
         public IActionResult OnGet()
