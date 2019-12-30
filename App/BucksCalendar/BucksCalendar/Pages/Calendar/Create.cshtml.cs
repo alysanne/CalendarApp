@@ -50,6 +50,7 @@ namespace BucksCalendar.Pages.Calendar
             [Display(Name = "Start date")]
             public DateTime StartDateTime { get; set; }
 
+            [Required(ErrorMessage = "This field is required.")]
             [DataType(DataType.DateTime)]
             [Display(Name = "End date")]
             public DateTime EndDateTime { get; set; }

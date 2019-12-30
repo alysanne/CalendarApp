@@ -1,4 +1,23 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+function showHideEndDate() {
+    if ($('#all-day-event-tickbox').prop('checked')) {
+        $('#end-date-field').hide();
+    } else {
+        $('#end-date-field').show();
+    }
+}
 
-// Write your Javascript code.
+$(document).ready(function () {
+    showHideEndDate();
+});
+
+$('#all-day-event-tickbox').click(function() {
+    showHideEndDate();
+});
+
+$('#submit-btn').click(function() {
+    if ($('#all-day-event-tickbox').prop('checked')) {
+        var startDate = $('#start-date').val();
+        var endDate = $('#end-date');
+        endDate.val(startDate);
+    }
+});
