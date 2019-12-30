@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using BucksCalendar.Areas.Identity.Data;
@@ -20,10 +21,66 @@ namespace BucksCalendar.Pages.Calendar
         {
             _context = context;
         }
+        
+        public Event Event { get; set; }
+        public Notification Notification { get; set; }
 
         [BindProperty]
-        public Event Event { get; set; }
+        public EventInput Input { get; set; }
+        
+        public class EventInput
+        {
+            [Required(ErrorMessage = "This field is required.")]
+            [DataType(DataType.Text)]
+            [Display(Name = "Category")]
+            public int CategoryID { get; set; }
+            
+            [Required(ErrorMessage = "This field is required.")]
+            [DataType(DataType.Text)]
+            public string Title { get; set; }
+            
+            [DataType(DataType.Text)]
+            public string Description { get; set; }
+            
+            [Display(Name = "All day event")]
+            public bool AllDayEvent { get; set; }
+            
+            [Required(ErrorMessage = "This field is required.")]
+            [DataType(DataType.DateTime)]
+            [Display(Name = "Start date")]
+            public DateTime StartDateTime { get; set; }
 
+            [DataType(DataType.DateTime)]
+            [Display(Name = "End date")]
+            public DateTime? EndDateTime { get; set; }
+            
+            [Display(Name = "Notify by SMS")]
+            public bool NotifyBySMS { get; set; }
+            
+            [Display(Name = "Notify by Email")]
+            public bool NotifyByEmail { get; set; }
+            
+            [DataType(DataType.DateTime)]
+            [Display(Name = "Scheduled for")]
+            public DateTime? ScheduledFor { get; set; }
+        }
+        
+        private void LoadEvent()
+        {
+            Input = new EventInput
+            {
+                CategoryID = Event.CategoryID,
+                AllDayEvent = Event.AllDayEvent,
+                StartDateTime = Event.StartDateTime,
+                EndDateTime = Event.EndDateTime,
+                Title = Event.Title,
+                Description = Event.Description,
+                NotifyByEmail = Event.Notification.NotifyByEmail,
+                NotifyBySMS = Event.Notification.NotifyBySMS,
+                ScheduledFor = Event.Notification.ScheduledFor
+            };
+        }
+        
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -32,23 +89,78 @@ namespace BucksCalendar.Pages.Calendar
             }
 
             Event = await _context.Events
-                .Include(e => e.User).FirstOrDefaultAsync(m => m.EventID == id);
+                .Include(e => e.User)
+                .Include(e => e.Category)
+                .Include(e => e.Notification)
+                .FirstOrDefaultAsync(m => m.EventID == id);
 
             if (Event == null)
             {
                 return NotFound();
             }
-           ViewData["UserID"] = new SelectList(_context.Set<CalendarUser>(), "Id", "Id");
+            
+            LoadEvent();
+
+            ViewData["UserID"] = new SelectList(_context.Set<CalendarUser>(), "Id", "Id");
             return Page();
         }
-
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+            
+            Event = await _context.Events
+                .Include(e => e.User)
+                .Include(e => e.Category)
+                .Include(e => e.Notification)
+                .FirstOrDefaultAsync(m => m.EventID == id);
+            
+            if (Input.CategoryID != Event.CategoryID)
+            {
+                Event.CategoryID = Input.CategoryID;
+            }
+            
+            if (Input.AllDayEvent != Event.AllDayEvent)
+            {
+                Event.AllDayEvent = Input.AllDayEvent;
+            }
+            
+            if (Input.StartDateTime != Event.StartDateTime)
+            {
+                Event.StartDateTime = Input.StartDateTime;
+            }
+            
+            if (Input.EndDateTime != Event.EndDateTime)
+            {
+                Event.EndDateTime = Input.EndDateTime;
+            }
+            
+            if (Input.Title != Event.Title)
+            {
+                Event.Title = Input.Title;
+            }
+            
+            if (Input.Description != Event.Description)
+            {
+                Event.Description = Input.Description;
+            }
+            
+            if (Input.NotifyBySMS != Event.Notification.NotifyBySMS)
+            {
+                Event.Notification.NotifyBySMS = Input.NotifyBySMS;
+            }
+            
+            if (Input.NotifyByEmail != Event.Notification.NotifyByEmail)
+            {
+                Event.Notification.NotifyByEmail = Input.NotifyByEmail;
+            }
+            
+            if (Input.ScheduledFor != Event.Notification.ScheduledFor)
+            {
+                Event.Notification.ScheduledFor = Input.ScheduledFor;
             }
 
             _context.Attach(Event).State = EntityState.Modified;
