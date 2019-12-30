@@ -13,11 +13,11 @@ function showHideEndDate() {
 }
 
 function showHideSchedule() {
-    console.log('schedule!')
-    console.log('notify ticked', notifyTicked())
     if (notifyTicked()) {
+        $('#scheduled-for').prop('required', true);
         $('#scheduled-for-field').show();
     } else {
+        $('#scheduled-for').prop('required', false);
         $('#scheduled-for-field').hide();
     }
 }
