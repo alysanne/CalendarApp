@@ -53,13 +53,13 @@
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Input.NotifyBySMS" /> @Html.DisplayNameFor(model => model.Input.NotifyBySMS)
-                    <input class="form-check-input" asp-for="Input.NotifyByEmail" /> @Html.DisplayNameFor(model => model.Input.NotifyByEmail)
+                    <input id="notify-tickbox-sms" class="notify-tickbox form-check-input" asp-for="Input.NotifyBySMS" /> @Html.DisplayNameFor(model => model.Input.NotifyBySMS)
+                    <input id="notify-tickbox-email" class="notify-tickbox form-check-input" asp-for="Input.NotifyByEmail" /> @Html.DisplayNameFor(model => model.Input.NotifyByEmail)
                 </label>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="scheduled-for-field">
                 <label asp-for="Input.ScheduledFor" class="control-label"></label>
-                <input asp-for="Input.ScheduledFor" class="form-control" />
+                <input asp-for="Input.ScheduledFor" class="form-control" id="scheduled-for" />
                 <span asp-validation-for="Input.ScheduledFor" class="text-danger"></span>
             </div>
             <div class="form-group">

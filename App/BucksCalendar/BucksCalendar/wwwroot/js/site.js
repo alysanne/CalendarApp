@@ -1,3 +1,9 @@
+﻿function notifyTicked() {
+    var smsChecked = $('#notify-tickbox-sms').prop('checked');
+    var emailChecked = $('#notify-tickbox-email').prop('checked');
+    return smsChecked || emailChecked;
+}
+
 function showHideEndDate() {
     if ($('#all-day-event-tickbox').prop('checked')) {
         $('#end-date-field').hide();
@@ -6,12 +12,27 @@ function showHideEndDate() {
     }
 }
 
+function showHideSchedule() {
+    console.log('schedule!')
+    console.log('notify ticked', notifyTicked())
+    if (notifyTicked()) {
+        $('#scheduled-for-field').show();
+    } else {
+        $('#scheduled-for-field').hide();
+    }
+}
+
 $(document).ready(function () {
     showHideEndDate();
+    showHideSchedule();
 });
 
 $('#all-day-event-tickbox').click(function() {
     showHideEndDate();
+});
+
+$('.notify-tickbox').click(function() {
+    showHideSchedule();
 });
 
 $('#submit-btn').click(function() {
@@ -19,5 +40,9 @@ $('#submit-btn').click(function() {
         var startDate = $('#start-date').val();
         var endDate = $('#end-date');
         endDate.val(startDate);
+    }
+    
+    if (!notifyTicked()) {
+        $('#scheduled-for').val("");
     }
 });
