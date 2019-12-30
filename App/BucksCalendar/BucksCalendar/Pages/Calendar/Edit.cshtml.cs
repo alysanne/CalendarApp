@@ -74,11 +74,15 @@ namespace BucksCalendar.Pages.Calendar
                 StartDateTime = Event.StartDateTime,
                 EndDateTime = Event.EndDateTime,
                 Title = Event.Title,
-                Description = Event.Description,
-                NotifyByEmail = Event.Notification.NotifyByEmail,
-                NotifyBySMS = Event.Notification.NotifyBySMS,
-                ScheduledFor = Event.Notification.ScheduledFor
+                Description = Event.Description
             };
+
+            if (Event.Notification != null)
+            {
+                Input.NotifyByEmail = Event.Notification.NotifyByEmail;
+                Input.NotifyBySMS = Event.Notification.NotifyBySMS;
+                Input.ScheduledFor = Event.Notification.ScheduledFor;
+            }
         }
         
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -147,20 +151,34 @@ namespace BucksCalendar.Pages.Calendar
             {
                 Event.Description = Input.Description;
             }
-            
-            if (Input.NotifyBySMS != Event.Notification.NotifyBySMS)
+
+            if (Event.Notification == null)
             {
-                Event.Notification.NotifyBySMS = Input.NotifyBySMS;
+                var notification = new Notification
+                {
+                    NotifyBySMS = Input.NotifyBySMS,
+                    NotifyByEmail = Input.NotifyByEmail,
+                    ScheduledFor = Input.ScheduledFor
+                };
+
+                Event.Notification = notification;
             }
-            
-            if (Input.NotifyByEmail != Event.Notification.NotifyByEmail)
+            else
             {
-                Event.Notification.NotifyByEmail = Input.NotifyByEmail;
-            }
+                if (Input.NotifyBySMS != Event.Notification.NotifyBySMS)
+                {
+                    Event.Notification.NotifyBySMS = Input.NotifyBySMS;
+                }
             
-            if (Input.ScheduledFor != Event.Notification.ScheduledFor)
-            {
-                Event.Notification.ScheduledFor = Input.ScheduledFor;
+                if (Input.NotifyByEmail != Event.Notification.NotifyByEmail)
+                {
+                    Event.Notification.NotifyByEmail = Input.NotifyByEmail;
+                }
+            
+                if (Input.ScheduledFor != Event.Notification.ScheduledFor)
+                {
+                    Event.Notification.ScheduledFor = Input.ScheduledFor;
+                }
             }
 
             _context.Attach(Event).State = EntityState.Modified;
