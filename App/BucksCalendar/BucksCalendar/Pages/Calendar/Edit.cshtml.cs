@@ -52,7 +52,7 @@ namespace BucksCalendar.Pages.Calendar
 
             [DataType(DataType.DateTime)]
             [Display(Name = "End date")]
-            public DateTime? EndDateTime { get; set; }
+            public DateTime EndDateTime { get; set; }
             
             [Display(Name = "Notify by SMS")]
             public bool NotifyBySMS { get; set; }
