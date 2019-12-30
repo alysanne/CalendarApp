@@ -14,19 +14,31 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].CategoryID)
+                @Html.DisplayNameFor(model => model.Event[0].Category)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].StartDateTime)
+                All day event
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].EndDateTime)
+                Start date
+            </th>
+            <th>
+                End date
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Event[0].Title)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Event[0].Description)
+            </th>
+            <th>
+                Notify by SMS
+            </th>
+            <th>
+                Notify by Email
+            </th>
+            <th>
+                Scheduled for
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Event[0].User)
@@ -38,7 +50,10 @@
 @foreach (var item in Model.Event) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.CategoryID)
+                @Html.DisplayFor(modelItem => item.Category.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllDayEvent)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartDateTime)
@@ -53,7 +68,16 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @Html.DisplayFor(modelItem => item.Notification.NotifyBySMS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notification.NotifyByEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notification.ScheduledFor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.EventID">Edit</a> |
