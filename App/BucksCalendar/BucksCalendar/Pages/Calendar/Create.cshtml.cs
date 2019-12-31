@@ -42,6 +42,9 @@ namespace BucksCalendar.Pages.Calendar
             [DataType(DataType.Text)]
             public string Description { get; set; }
             
+            [DataType(DataType.Text)]
+            public string Location { get; set; }
+            
             [Display(Name = "All day event")]
             public bool AllDayEvent { get; set; }
             
@@ -86,7 +89,8 @@ namespace BucksCalendar.Pages.Calendar
                 StartDateTime = Input.StartDateTime, 
                 EndDateTime = Input.EndDateTime, 
                 Title = Input.Title,
-                Description = Input.Description
+                Description = Input.Description,
+                Location = Input.Location
             };
 
             _context.Events.Add(calendarEvent);

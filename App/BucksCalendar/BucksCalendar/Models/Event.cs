@@ -14,6 +14,7 @@ namespace BucksCalendar.Models
         public DateTime EndDateTime { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string Location { get; set; }
 
         public Category Category { get; set; }
         public CalendarUser User { get; set; }
