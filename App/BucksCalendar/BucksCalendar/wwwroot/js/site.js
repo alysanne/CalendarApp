@@ -4,14 +4,6 @@
     return smsChecked || emailChecked;
 }
 
-function showHideEndDate() {
-    if ($('#all-day-event-tickbox').prop('checked')) {
-        $('#end-date-field').hide();
-    } else {
-        $('#end-date-field').show();
-    }
-}
-
 function showHideSchedule() {
     if (notifyTicked()) {
         $('#scheduled-for').prop('required', true);
@@ -23,12 +15,7 @@ function showHideSchedule() {
 }
 
 $(document).ready(function () {
-    showHideEndDate();
     showHideSchedule();
-});
-
-$('#all-day-event-tickbox').click(function() {
-    showHideEndDate();
 });
 
 $('.notify-tickbox').click(function() {
@@ -36,12 +23,6 @@ $('.notify-tickbox').click(function() {
 });
 
 $('#submit-btn').click(function() {
-    if ($('#all-day-event-tickbox').prop('checked')) {
-        var startDate = $('#start-date').val();
-        var endDate = $('#end-date');
-        endDate.val(startDate);
-    }
-    
     if (!notifyTicked()) {
         $('#scheduled-for').val("");
     }
