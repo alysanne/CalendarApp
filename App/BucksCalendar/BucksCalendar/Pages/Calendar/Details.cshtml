@@ -67,6 +67,7 @@
                     }
                 }
             </div>
+            <hr class="card-division"/>
             <div class="checkbox-with-label">
                 <span aria-labelledby="notify-sms-event-label" id="event-notify-sms">@Html.DisplayFor(model => model.Event.Notification.NotifyBySMS)</span>
                 <label id="notify-sms-event-label">Notify by SMS</label>
@@ -82,7 +83,7 @@
                 {
                     <div class="text-with-label">
                         <label id="scheduled-notification-label">Notification date: </label>
-                        <span aria-labelledby="scheduled-notification-label" id="scheduled-for">@Html.DisplayFor(model => model.Event.Notification.ScheduledFor)</span>
+                        <span aria-labelledby="scheduled-notification-label" id="scheduled-for">@Model.Event.Notification.ScheduledFor?.ToString("ddd d MMM yyyy")</span>
                     </div>
                 }
             }
@@ -103,8 +104,8 @@
         <div class="card-bottom-links">
             <a asp-page="./Index">Back to calendar</a>
             <div class="icons">
-                <a aria-label="Edit button" asp-page="./Edit"><img src="~/assets/img/edit-24px.svg" alt="Edit button"/></a>
-                <a aria-label="Delete button" asp-page="./Delete"><img src="~/assets/img/delete-24px.svg" alt="Delete button"/></a>
+                <a aria-label="Edit button" asp-page="./Edit" asp-route-id="@Model.Event.EventID"><img src="~/assets/img/edit-24px.svg" alt="Edit button"/></a>
+                <a aria-label="Delete button" asp-page="./Delete" asp-route-id="@Model.Event.EventID"><img src="~/assets/img/delete-24px.svg" alt="Delete button"/></a>
             </div>
         </div>
     </div>

@@ -80,6 +80,14 @@ body {
   font-family: "Quicksand", sans-serif;
 }
 
+.page-subtitle {
+  margin-top: 5px;
+  color: #ffffff;
+  font-family: "Quicksand", sans-serif;
+  font-weight: lighter;
+  font-size: 17px;
+}
+
 .page-content {
   display: flex;
   flex-direction: column;
@@ -374,6 +382,11 @@ div.form-errors ul {
 .card-bottom-links {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
+}
+
+.card-bottom-links .btn {
+  margin: 0 !important;
 }
 
 .icons img {
