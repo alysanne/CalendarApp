@@ -42,6 +42,9 @@ namespace BucksCalendar.Pages.Calendar
             [DataType(DataType.Text)]
             public string Description { get; set; }
             
+            [DataType(DataType.Text)]
+            public string Location { get; set; }
+            
             [Display(Name = "All day event")]
             public bool AllDayEvent { get; set; }
             
@@ -74,7 +77,8 @@ namespace BucksCalendar.Pages.Calendar
                 StartDateTime = Event.StartDateTime,
                 EndDateTime = Event.EndDateTime,
                 Title = Event.Title,
-                Description = Event.Description
+                Description = Event.Description,
+                Location = Event.Location
             };
 
             if (Event.Notification != null)
@@ -151,7 +155,12 @@ namespace BucksCalendar.Pages.Calendar
             {
                 Event.Description = Input.Description;
             }
-
+            
+            if (Input.Location != Event.Location)
+            {
+                Event.Location = Input.Location;
+            }
+            
             if (Event.Notification == null)
             {
                 var notification = new Notification

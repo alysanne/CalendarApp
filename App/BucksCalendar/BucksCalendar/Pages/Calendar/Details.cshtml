@@ -1,79 +1,111 @@
 @page
+@using BucksCalendar.Models
 @model BucksCalendar.Pages.Calendar.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Event</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.Category)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Category.Type)
-        </dd>
-        <dt class="col-sm-2">
-            All day event
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.AllDayEvent)
-        </dd>
-        <dt class="col-sm-2">
-            Start date
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.StartDateTime)
-        </dd>
-        <dt class="col-sm-2">
-            End date
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.EndDateTime)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Description)
-        </dd>
-        <dt class="col-sm-2">
-            Author
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.User.UserName)
-        </dd>
-        <dt class="col-sm-2">
-            Notify by email
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Notification.NotifyByEmail)
-        </dd>
-        <dt class="col-sm-2">
-            Notify by SMS
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Notification.NotifyBySMS)
-        </dd>
-        <dt class="col-sm-2">
-            Scheduled for
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Notification.ScheduledFor)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Event.EventID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+<div class="page-content">
+    <h4 class="page-title">Event details</h4>
+    <div class="calendar-card details-card">
+        <div id="card-body">
+            <p aria-label="Title" id="event-title">@Html.DisplayFor(model => model.Event.Title)</p>
+            <div class="checkbox-with-label">
+                <span aria-labelledby="all-day-event-label" id="event-all-day">@Html.DisplayFor(model => model.Event.AllDayEvent)</span>
+                <label id="all-day-event-label">All day event</label>
+            </div>
+            <div class="event-dates">
+                @{
+                    if (Model.Event.AllDayEvent == true)
+                    {
+                        var startDate = Model.Event.StartDateTime.ToString("ddd d MMM yyyy");
+                        var endDate = Model.Event.EndDateTime.ToString("ddd d MMM yyyy");
+                        <span>@startDate</span>
+                        if (startDate != endDate)
+                        {
+                            <span> - </span>
+                            <span>@endDate</span>
+                        }
+                    }
+                    else
+                    {
+                        <span>@Model.Event.StartDateTime.ToString("ddd d MMM yyyy H:mm")</span>
+                        <span> - </span>
+                        <span>@Model.Event.EndDateTime.ToString("ddd d MMM yyyy H:mm")</span>
+                    }
+                }
+            </div>
+            @{
+                var location = Model.Event.Location;
+    
+                if (String.IsNullOrEmpty(location))
+                {
+                    <p aria-label="Location" class="event-location-missing">No location</p>
+                }
+                else
+                {
+                    <p aria-label="Location" class="event-location">@location</p>
+                }
+            }
+            <div class="category-with-dot">
+                <div class="dot @Model.Event.Category.Type-dot"></div>
+                @{
+                    var category = Model.Event.Category.Type;
+    
+                    switch (category)
+                    {
+                        case Categories.AnnualLeave:
+                            <span aria-label="Category" id="event-category">Annual Leave</span>
+                            break;
+                        case Categories.BankHoliday:
+                            <span aria-label="Category" id="event-category">Bank Holiday</span>
+                            break;
+                        default:
+                            <span aria-label="Category" id="event-category">@Html.DisplayFor(model => model.Event.Category.Type)</span>
+                            break;
+                    }
+                }
+            </div>
+            <div class="checkbox-with-label">
+                <span aria-labelledby="notify-sms-event-label" id="event-notify-sms">@Html.DisplayFor(model => model.Event.Notification.NotifyBySMS)</span>
+                <label id="notify-sms-event-label">Notify by SMS</label>
+            </div>
+            <div class="checkbox-with-label">
+                <span aria-labelledby="notify-email-event-label" id="event-notify-email">@Html.DisplayFor(model => model.Event.Notification.NotifyByEmail)</span>
+                <label id="notify-email-event-label">Notify by email</label>
+            </div>
+            @{
+                var notification = Model.Event.Notification;
+    
+                if (notification != null && (Model.Event.Notification.NotifyBySMS || Model.Event.Notification.NotifyByEmail))
+                {
+                    <div class="text-with-label">
+                        <label id="scheduled-notification-label">Notification date: </label>
+                        <span aria-labelledby="scheduled-notification-label" id="scheduled-for">@Html.DisplayFor(model => model.Event.Notification.ScheduledFor)</span>
+                    </div>
+                }
+            }
+            <hr class="card-division"/>
+            @{
+                var description = Model.Event.Description;
+    
+                if (String.IsNullOrEmpty(description))
+                {
+                    <p aria-label="Description" class="event-description-missing">No description</p>
+                }
+                else
+                {
+                    <p aria-label="Description" class="event-description">@description</p>
+                }
+            }
+        </div>
+        <div class="card-bottom-links">
+            <a asp-page="./Index">Back to calendar</a>
+            <div class="icons">
+                <a aria-label="Edit button" asp-page="./Edit"><img src="~/assets/img/edit-24px.svg" alt="Edit button"/></a>
+                <a aria-label="Delete button" asp-page="./Delete"><img src="~/assets/img/delete-24px.svg" alt="Delete button"/></a>
+            </div>
+        </div>
+    </div>
 </div>
