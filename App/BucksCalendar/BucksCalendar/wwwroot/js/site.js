@@ -1,6 +1,6 @@
 ﻿function notifyTicked() {
-    var smsChecked = $('#notify-tickbox-sms').prop('checked');
-    var emailChecked = $('#notify-tickbox-email').prop('checked');
+    var smsChecked = $('#notify-checkbox-sms').prop('checked');
+    var emailChecked = $('#notify-checkbox-email').prop('checked');
     return smsChecked || emailChecked;
 }
 

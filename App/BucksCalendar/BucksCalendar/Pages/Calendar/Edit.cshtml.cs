@@ -37,12 +37,14 @@ namespace BucksCalendar.Pages.Calendar
             
             [Required(ErrorMessage = "This field is required.")]
             [DataType(DataType.Text)]
+            [StringLength(30)]
             public string Title { get; set; }
             
             [DataType(DataType.Text)]
             public string Description { get; set; }
             
             [DataType(DataType.Text)]
+            [StringLength(30)]
             public string Location { get; set; }
             
             [Display(Name = "All day event")]
@@ -50,10 +52,13 @@ namespace BucksCalendar.Pages.Calendar
             
             [Required(ErrorMessage = "This field is required.")]
             [DataType(DataType.DateTime)]
+            [DisplayFormat(DataFormatString="{0:dd/MM/yy HH:mm}", ApplyFormatInEditMode=true)]
             [Display(Name = "Start date")]
             public DateTime StartDateTime { get; set; }
 
+            [Required(ErrorMessage = "This field is required.")]
             [DataType(DataType.DateTime)]
+            [DisplayFormat(DataFormatString="{0:dd/MM/yy HH:mm}", ApplyFormatInEditMode=true)]
             [Display(Name = "End date")]
             public DateTime EndDateTime { get; set; }
             
@@ -64,6 +69,7 @@ namespace BucksCalendar.Pages.Calendar
             public bool NotifyByEmail { get; set; }
             
             [DataType(DataType.DateTime)]
+            [DisplayFormat(DataFormatString="{0:dd/MM/yy}", ApplyFormatInEditMode=true)]
             [Display(Name = "Scheduled for")]
             public DateTime? ScheduledFor { get; set; }
         }

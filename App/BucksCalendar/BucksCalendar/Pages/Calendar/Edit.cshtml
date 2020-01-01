@@ -6,78 +6,99 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Event</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Event.EventID" />
-            <div class="form-group">
-                <label asp-for="Input.CategoryID" class="control-label"></label>
-                <select asp-for="Input.CategoryID" class="form-control">
-                    <option value="1">@Categories.Lecture</option>
-                    <option value="2">@Categories.Deadline</option>
-                    <option value="3">@Categories.WFH</option>
-                    <option value="4">@Categories.AnnualLeave</option>
-                    <option value="5">@Categories.BankHoliday</option>
-                </select>
-                <span asp-validation-for="Input.CategoryID" class="text-danger"></span>
+<div class="page-content">
+    <h4 class="page-title">Edit event</h4>
+    <div class="calendar-card details-card">
+        <form class="calendar-card-form" method="post">
+            <div class="card-body-form">
+                <input type="hidden" asp-for="Event.EventID"/>
+                <div class="form-group row">
+                    <label asp-for="Input.Title" class="col-sm-4 col-form-label card-form-label"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="Input.Title" class="form-control"/>
+                        <span asp-validation-for="Input.Title" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Input.AllDayEvent" class="col-sm-4 col-form-label card-form-label"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="Input.AllDayEvent" class="form-control" id="all-day-event-tickbox"/>
+                        <span asp-validation-for="Input.AllDayEvent" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Input.StartDateTime" class="col-sm-4 col-form-label card-form-label"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="Input.StartDateTime" class="form-control" id="start-date"/>
+                        <span asp-validation-for="Input.StartDateTime" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Input.EndDateTime" class="end-date col-sm-4 col-form-label card-form-label"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="Input.EndDateTime" class="end-date form-control" id="end-date"/>
+                        <span asp-validation-for="Input.EndDateTime" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Input.Location" class="col-sm-4 col-form-label card-form-label"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="Input.Location" class="form-control"/>
+                        <span asp-validation-for="Input.Location" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Input.CategoryID" class="col-sm-4 col-form-label card-form-label"></label>
+                    <div class="col-sm-8">
+                        <select asp-for="Input.CategoryID" class="selectpicker form-control">
+                            <option value="1">@Categories.Lecture</option>
+                            <option value="2">@Categories.Deadline</option>
+                            <option value="3">@Categories.WFH</option>
+                            <option value="4">@Categories.AnnualLeave</option>
+                            <option value="5">@Categories.BankHoliday</option>
+                        </select>
+                        <span asp-validation-for="Input.CategoryID" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 card-form-label">Notify by</label>
+                    <div class="col-sm-8">
+                        <div class="form-check form-check-inline">
+                            <input asp-for="Input.NotifyBySMS" class="form-check-input notify-tickbox" id="notify-checkbox-sms"/>
+                            <label class="form-check-label" for="notify-checkbox-sms">SMS</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input asp-for="Input.NotifyByEmail" class="form-check-input notify-tickbox" id="notify-checkbox-email"/>
+                            <label class="form-check-label" for="notify-checkbox-email">Email</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row" id="scheduled-for-field">
+                    <label asp-for="Input.ScheduledFor" class="end-date col-sm-4 col-form-label card-form-label"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="Input.ScheduledFor" class="form-control" id="scheduled-for"/>
+                        <span asp-validation-for="Input.ScheduledFor" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label asp-for="Input.Description" class="col-sm-4 col-form-label card-form-label"></label>
+                    <div class="col-sm-8">
+                        <textarea asp-for="Input.Description" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Input.Description" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.AllDayEvent" class="control-label"></label>
-                <input asp-for="Input.AllDayEvent" class="form-control" id="all-day-event-tickbox" />
-                <span asp-validation-for="Input.AllDayEvent" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.StartDateTime" class="control-label"></label>
-                <input asp-for="Input.StartDateTime" class="form-control" id="start-date" />
-                <span asp-validation-for="Input.StartDateTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.EndDateTime" class="end-date control-label"></label>
-                <input asp-for="Input.EndDateTime" class="end-date form-control" id="end-date" />
-                <span asp-validation-for="Input.EndDateTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Title" class="control-label"></label>
-                <input asp-for="Input.Title" class="form-control" />
-                <span asp-validation-for="Input.Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Description" class="control-label"></label>
-                <input asp-for="Input.Description" class="form-control" />
-                <span asp-validation-for="Input.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Location" class="control-label"></label>
-                <input asp-for="Input.Location" class="form-control" />
-                <span asp-validation-for="Input.Location" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input id="notify-tickbox-sms" class="notify-tickbox form-check-input" asp-for="Input.NotifyBySMS" /> @Html.DisplayNameFor(model => model.Input.NotifyBySMS)
-                    <input id="notify-tickbox-email" class="notify-tickbox form-check-input" asp-for="Input.NotifyByEmail" /> @Html.DisplayNameFor(model => model.Input.NotifyByEmail)
-                </label>
-            </div>
-            <div class="form-group" id="scheduled-for-field">
-                <label asp-for="Input.ScheduledFor" class="control-label"></label>
-                <input asp-for="Input.ScheduledFor" class="form-control" id="scheduled-for" />
-                <span asp-validation-for="Input.ScheduledFor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" id="submit-btn" />
+            <div class="card-bottom-links">
+                <a asp-page="./Index">Back to calendar</a>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" id="submit-btn"/>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
-
-@section Scripts {
+    @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
