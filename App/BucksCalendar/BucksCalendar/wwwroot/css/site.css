@@ -156,10 +156,10 @@ a, a:active {
   margin-left: 5px;
 }
 
-/* Form styles
+/* Form styles & Calendar card styles
 -------------------------------------------------- */
 
-.form-card {
+.form-card, .calendar-card {
   background-color: #ffffff;
   border-radius: 15px;
   margin: 25px auto;
@@ -167,6 +167,10 @@ a, a:active {
   -webkit-box-shadow: 7px 7px 15px 0px rgba(0,0,0,0.5);
   -moz-box-shadow: 7px 7px 15px 0px rgba(0,0,0,0.5);
   box-shadow: 7px 7px 15px 0px rgba(0,0,0,0.5);}
+
+
+/* Form styles
+-------------------------------------------------- */
 
 .form {
   display: flex;
@@ -243,15 +247,6 @@ form .btn[type="submit"]:hover, form .btn[type="submit"]:active {
   background-color: #f85c6aee !important;
 }
 
-.redirect-link {
-  color: #008196;
-  text-decoration: underline;
-}
-
-.redirect-link:hover {
-  color: #005e6e;
-}
-
 .field-validation-error {
   min-height: 22px;
   display: block;
@@ -304,6 +299,85 @@ div.form-errors ul {
   .form-card-login {
     width: 250px;
   }
+}
+
+/* Calendar card styles
+-------------------------------------------------- */
+
+.details-card {
+  width: 480px;
+  height: 550px;
+}
+
+#event-title {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.checkbox-with-label label {
+  margin-left: 5px;
+}
+
+.event-dates {
+  margin-bottom: 7px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.Lecture-dot {
+  background-color: #54C6A2;
+
+}
+
+.Deadline-dot {
+  background-color: #DE839C;
+
+}
+
+.WFH-dot {
+  background-color: #9575C9;
+
+}
+
+.AnnualLeave-dot {
+  background-color: #CEA353;
+
+}
+
+.BankHoliday-dot {
+  background-color: #52B2CE;
+
+}
+
+.category-with-dot {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.event-location-missing, .event-description-missing {
+  color: #777A7B;
+  font-style: italic;
+}
+
+.calendar-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-bottom-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icons img {
+  filter: invert(48%) sepia(1%) saturate(1%) hue-rotate(314deg) brightness(91%) contrast(91%);
 }
 
 /* Profile styles
