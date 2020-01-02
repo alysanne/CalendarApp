@@ -8,12 +8,15 @@
 
 <div class="page-content">
     <h4 class="page-title">Edit event</h4>
-    <div class="calendar-card details-card">
+    <div class="calendar-card edit-card">
         <form class="calendar-card-form" method="post">
             <div class="card-body-form">
                 <input type="hidden" asp-for="Event.EventID"/>
                 <div class="form-group row">
-                    <label asp-for="Input.Title" class="col-sm-4 col-form-label card-form-label"></label>
+                    <div class="col-sm-4">
+                        <label asp-for="Input.Title" class="col-form-label card-form-label"></label>
+                        <span class="asterisk"> *</span>
+                    </div>
                     <div class="col-sm-8">
                         <input asp-for="Input.Title" class="form-control"/>
                         <span asp-validation-for="Input.Title" class="text-danger"></span>
@@ -27,17 +30,31 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="Input.StartDateTime" class="col-sm-4 col-form-label card-form-label"></label>
-                    <div class="col-sm-8">
-                        <input asp-for="Input.StartDateTime" class="form-control" id="start-date"/>
-                        <span asp-validation-for="Input.StartDateTime" class="text-danger"></span>
+                    <div class="form-group col-sm-8">
+                        <label asp-for="Input.StartDate" class="card-form-label"></label>
+                        <span class="asterisk"> *</span>
+                        <input asp-for="Input.StartDate" class="form-control" id="start-date" placeholder="01/01/2020" />
+                        <span asp-validation-for="Input.StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label asp-for="Input.StartTime" class="card-form-label"></label>
+                        <span class="asterisk"> *</span>
+                        <input asp-for="Input.StartTime" class="form-control" id="start-time" placeholder="10:00" />
+                        <span asp-validation-for="Input.StartTime" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="Input.EndDateTime" class="end-date col-sm-4 col-form-label card-form-label"></label>
-                    <div class="col-sm-8">
-                        <input asp-for="Input.EndDateTime" class="end-date form-control" id="end-date"/>
-                        <span asp-validation-for="Input.EndDateTime" class="text-danger"></span>
+                    <div class="form-group col-sm-8">
+                        <label asp-for="Input.EndDate" class="end-date card-form-label"></label>
+                        <span class="asterisk"> *</span>
+                        <input asp-for="Input.EndDate" class="end-date form-control" id="end-date" placeholder="01/01/2020" />
+                        <span asp-validation-for="Input.EndDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label asp-for="Input.EndTime" class="card-form-label"></label>
+                        <span class="asterisk"> *</span>
+                        <input asp-for="Input.EndTime" class="form-control" id="end-time" placeholder="17:00" />
+                        <span asp-validation-for="Input.EndTime" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -48,14 +65,17 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="Input.CategoryID" class="col-sm-4 col-form-label card-form-label"></label>
+                    <div class="col-sm-4">
+                        <label asp-for="Input.CategoryID" class="col-form-label card-form-label"></label>
+                        <span class="asterisk"> *</span>
+                    </div>
                     <div class="col-sm-8">
                         <select asp-for="Input.CategoryID" class="selectpicker form-control">
                             <option value="1">@Categories.Lecture</option>
                             <option value="2">@Categories.Deadline</option>
                             <option value="3">@Categories.WFH</option>
-                            <option value="4">@Categories.AnnualLeave</option>
-                            <option value="5">@Categories.BankHoliday</option>
+                            <option value="4">Annual Leave</option>
+                            <option value="5">Bank Holiday</option>
                         </select>
                         <span asp-validation-for="Input.CategoryID" class="text-danger"></span>
                     </div>
@@ -74,7 +94,10 @@
                     </div>
                 </div>
                 <div class="form-group row" id="scheduled-for-field">
-                    <label asp-for="Input.ScheduledFor" class="end-date col-sm-4 col-form-label card-form-label"></label>
+                    <div class="col-sm-4">
+                        <label asp-for="Input.ScheduledFor" class="col-form-label card-form-label"></label>
+                        <span class="asterisk"> *</span>
+                    </div>
                     <div class="col-sm-8">
                         <input asp-for="Input.ScheduledFor" class="form-control" id="scheduled-for"/>
                         <span asp-validation-for="Input.ScheduledFor" class="text-danger"></span>

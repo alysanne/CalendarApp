@@ -52,15 +52,27 @@ namespace BucksCalendar.Pages.Calendar
             
             [Required(ErrorMessage = "This field is required.")]
             [DataType(DataType.DateTime)]
-            [DisplayFormat(DataFormatString="{0:dd/MM/yy HH:mm}", ApplyFormatInEditMode=true)]
+            [DisplayFormat(DataFormatString="{0:dd/MM/yyyy}", ApplyFormatInEditMode=true)]
             [Display(Name = "Start date")]
-            public DateTime StartDateTime { get; set; }
+            public DateTime StartDate { get; set; }
+            
+            [Required(ErrorMessage = "Required.")]
+            [DataType(DataType.Time)]
+            [DisplayFormat(DataFormatString="{0:HH:mm}", ApplyFormatInEditMode=true)]
+            [Display(Name = "Time")]
+            public DateTime StartTime { get; set; }
 
             [Required(ErrorMessage = "This field is required.")]
             [DataType(DataType.DateTime)]
-            [DisplayFormat(DataFormatString="{0:dd/MM/yy HH:mm}", ApplyFormatInEditMode=true)]
+            [DisplayFormat(DataFormatString="{0:dd/MM/yyyy}", ApplyFormatInEditMode=true)]
             [Display(Name = "End date")]
-            public DateTime EndDateTime { get; set; }
+            public DateTime EndDate { get; set; }
+            
+            [Required(ErrorMessage = "Required.")]
+            [DataType(DataType.Time)]
+            [DisplayFormat(DataFormatString="{0:HH:mm}", ApplyFormatInEditMode=true)]
+            [Display(Name = "Time")]
+            public DateTime EndTime { get; set; }
             
             [Display(Name = "Notify by SMS")]
             public bool NotifyBySMS { get; set; }
@@ -69,7 +81,7 @@ namespace BucksCalendar.Pages.Calendar
             public bool NotifyByEmail { get; set; }
             
             [DataType(DataType.DateTime)]
-            [DisplayFormat(DataFormatString="{0:dd/MM/yy}", ApplyFormatInEditMode=true)]
+            [DisplayFormat(DataFormatString="{0:dd/MM/yyyy}", ApplyFormatInEditMode=true)]
             [Display(Name = "Scheduled for")]
             public DateTime? ScheduledFor { get; set; }
         }
@@ -80,8 +92,10 @@ namespace BucksCalendar.Pages.Calendar
             {
                 CategoryID = Event.CategoryID,
                 AllDayEvent = Event.AllDayEvent,
-                StartDateTime = Event.StartDateTime,
-                EndDateTime = Event.EndDateTime,
+                StartDate = Event.StartDateTime.Date,
+                StartTime = default(DateTime).Add(Event.StartDateTime.TimeOfDay),
+                EndDate = Event.EndDateTime.Date,
+                EndTime = default(DateTime).Add(Event.EndDateTime.TimeOfDay),
                 Title = Event.Title,
                 Description = Event.Description,
                 Location = Event.Location
@@ -141,15 +155,17 @@ namespace BucksCalendar.Pages.Calendar
             {
                 Event.AllDayEvent = Input.AllDayEvent;
             }
-            
-            if (Input.StartDateTime != Event.StartDateTime)
+
+            var startDateTime = Input.StartDate.Date.Add(Input.StartTime.TimeOfDay);
+            if (startDateTime != Event.StartDateTime)
             {
-                Event.StartDateTime = Input.StartDateTime;
+                Event.StartDateTime = startDateTime;
             }
             
-            if (Input.EndDateTime != Event.EndDateTime)
+            var endDateTime = Input.EndDate.Date.Add(Input.EndTime.TimeOfDay);
+            if (endDateTime != Event.EndDateTime)
             {
-                Event.EndDateTime = Input.EndDateTime;
+                Event.EndDateTime = endDateTime;
             }
             
             if (Input.Title != Event.Title)

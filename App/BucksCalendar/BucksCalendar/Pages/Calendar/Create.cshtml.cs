@@ -51,12 +51,22 @@ namespace BucksCalendar.Pages.Calendar
             [Required(ErrorMessage = "This field is required.")]
             [DataType(DataType.DateTime)]
             [Display(Name = "Start date")]
-            public DateTime StartDateTime { get; set; }
+            public DateTime StartDate { get; set; }
+            
+            [Required(ErrorMessage = "Required.")]
+            [DataType(DataType.Time)]
+            [Display(Name = "Time")]
+            public DateTime StartTime { get; set; }
 
             [Required(ErrorMessage = "This field is required.")]
             [DataType(DataType.DateTime)]
             [Display(Name = "End date")]
-            public DateTime EndDateTime { get; set; }
+            public DateTime EndDate { get; set; }
+            
+            [Required(ErrorMessage = "Required.")]
+            [DataType(DataType.Time)]
+            [Display(Name = "Time")]
+            public DateTime EndTime { get; set; }
             
             [Display(Name = "Notify by SMS")]
             public bool NotifyBySMS { get; set; }
@@ -86,8 +96,8 @@ namespace BucksCalendar.Pages.Calendar
                 UserID = _userManager.GetUserId(User),
                 CategoryID = Input.CategoryID,
                 AllDayEvent = Input.AllDayEvent,
-                StartDateTime = Input.StartDateTime, 
-                EndDateTime = Input.EndDateTime, 
+                StartDateTime = Input.StartDate.Date.Add(Input.StartTime.TimeOfDay), 
+                EndDateTime = Input.EndDate.Date.Add(Input.EndTime.TimeOfDay),
                 Title = Input.Title,
                 Description = Input.Description,
                 Location = Input.Location
