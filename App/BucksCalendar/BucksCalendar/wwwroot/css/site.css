@@ -503,6 +503,8 @@ table#calendar {
 td.calendar-day {
   font-size: 14px;
   line-height: 20px;
+  height: 100px;
+  padding: 6px 8px;
 }
 
 .current-day {

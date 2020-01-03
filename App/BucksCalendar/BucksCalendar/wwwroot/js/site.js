@@ -37,68 +37,64 @@ var currentYear = currentDate.getFullYear();
 var currentMonth = currentDate.getMonth();
 
 // Selected date values
-var selectedYear = $("#year");
-var selectedMonth = $("#month");
+function getSelectedYearNumber() {
+    return parseInt($("#year").val());
+}
 
-var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-var monthsLong = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+function getSelectedMonthNumber() {
+    return parseInt($("#month").val());
+}
+
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 $(document).ready(function () {
-    selectedMonth.val(currentMonth.toString()).change();
-    selectedYear.val(currentYear.toString()).change();
+    $("#month").val(currentMonth.toString()).change();
+    $("#year").val(currentYear.toString()).change();
     generateCalendar(currentMonth, currentYear);
 });
 
 /* Calendar navigation buttons */
 
 $("#next").click(function() {
-    var intYear = parseInt(selectedYear.val());
-    var intMonth = parseInt(selectedMonth.val());
+    var year = getSelectedYearNumber();
+    var month = getSelectedMonthNumber();
+    var calcYear = (month === 11) ? year + 1 : year;
+    var calcMonth = (month + 1) % 12;
 
-    var calcYear = (intMonth === 11) ? intYear + 1 : intYear;
-    var calcMonth = (intMonth + 1) % 12;
-
-    selectedMonth.val(calcMonth.toString()).change();
-    selectedYear.val(calcYear.toString()).change();
+    $("#month").val(calcMonth.toString()).change();
+    $("#year").val(calcYear.toString()).change();
     generateCalendar(calcMonth, calcYear);
 });
 
 $("#previous").click(function() {
-    var intYear = parseInt(selectedYear.val());
-    var intMonth = parseInt(selectedMonth.val());
+    var year = getSelectedYearNumber();
+    var month = getSelectedMonthNumber();
+    var calcYear = (month === 0) ? year - 1 : year;
+    var calcMonth = (month === 0) ? 11 : month - 1;
 
-    var calcYear = (intMonth === 0) ? intYear - 1 : intYear;
-    var calcMonth = (intMonth === 0) ? 11 : intMonth - 1;
-    
-    selectedMonth.val(calcMonth.toString()).change();
-    selectedYear.val(calcYear.toString()).change();
+    $("#month").val(calcMonth.toString()).change();
+    $("#year").val(calcYear.toString()).change();
     generateCalendar(calcMonth, calcYear);
 });
 
 $("#today").click(function() {
-    selectedMonth.val(currentMonth).change();
-    selectedYear.val(currentYear).change();
+    $("#month").val(currentMonth).change();
+    $("#year").val(currentYear).change();
     generateCalendar(currentMonth, currentYear);
 });
 
-selectedMonth.change(function () {
-    var intYear = parseInt(selectedYear.val());
-    var intMonth = parseInt(selectedMonth.val());
-    
-    generateCalendar(intMonth, intYear);
+$("#month").change(function () {
+    generateCalendar(getSelectedMonthNumber(), getSelectedYearNumber());
 });
 
-selectedYear.change(function () {
-    var intYear = parseInt(selectedYear.val());
-    var intMonth = parseInt(selectedMonth.val());
-
-    generateCalendar(intMonth, intYear);
+$("#year").change(function () {
+    generateCalendar(getSelectedMonthNumber(), getSelectedYearNumber());
 });
 
 /* Calendar generation */
 
 function updateTitle(month, year) {
-    $("#chosen-month").text(monthsLong[month]);
+    $("#chosen-month").text(months[month]);
     $("#chosen-year").text(year);
 }
 
@@ -126,7 +122,7 @@ function generateCalendar(month, year) {
             } else if (i === 0 && j < firstDayOfMonth) {
                 $("#row-" + i).append("<td></td>");
             } else {
-                $("#row-" + i).append("<td class='calendar-day' id='day-" + dayNumber + "'>" + dayNumber + "</td>");
+                $("#row-" + i).append("<td class='calendar-day' id='day-" + dayNumber + "'><div>" + dayNumber + "</div></td>");
                 
                 // Add style for current day
                 if (dayNumber === currentDate.getDate() && year === currentYear && month === currentMonth) {
@@ -137,4 +133,42 @@ function generateCalendar(month, year) {
             }
         }
     }
+    addCalendarEvents()
+}
+
+function addCalendarEvents() {
+    var modelData = $("#events").children();
+    modelData.each(function () {
+        var title = $(this).find(".event-title").text().trim();
+        var category = $(this).find(".event-category").text().trim();
+        var start = $(this).find(".event-start-date").text().trim();
+        var end = $(this).find(".event-end-date").text().trim();
+
+        var startDateTime = new Date(start);
+        var startDate = new Date(startDateTime.getFullYear(), startDateTime.getMonth(), startDateTime.getDate());
+        var endDateTime = new Date(end);
+        var endDate = new Date(endDateTime.getFullYear(), endDateTime.getMonth(), endDateTime.getDate());
+
+        var year = getSelectedYearNumber();
+        var month = getSelectedMonthNumber();
+
+        // Use 1st day of selected month if event starts in a previous month
+        var firstDayOfMonth = new Date(year, month, 1);
+        startDate = startDate < firstDayOfMonth ? firstDayOfMonth : startDate;
+
+        // Use last day of selected month if event ends in a later month
+        var lastDayOfMonth = new Date(year, month, daysInMonth(month, year));
+        endDate = endDate > lastDayOfMonth ? lastDayOfMonth : endDate;
+
+        var datePointer = startDate;
+        do {
+            debugger
+            if (datePointer.getMonth() !== month) {
+                break;
+            }
+
+            $("#day-" + datePointer.getDate()).append(title);
+            datePointer.setDate(datePointer.getDate()+1);
+        } while (datePointer <= endDate);
+    });
 }

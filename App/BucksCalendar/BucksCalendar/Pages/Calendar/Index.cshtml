@@ -8,8 +8,8 @@
 <div class="page-content">
     <div class="calendar-header">
         <h4 class="page-title">
-            <span id="chosen-month">January</span>
-            <span id="chosen-year">2020</span>
+            <span id="chosen-month"></span>
+            <span id="chosen-year"></span>
         </h4>
         <div id="calendar-navigator">
             <a asp-page="Create" class="btn btn-outline-primary" id="add">+</a>
@@ -106,22 +106,22 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="events">
 @foreach (var item in Model.Event) {
         <tr>
-            <td>
+            <td class="event-category">
                 @Html.DisplayFor(modelItem => item.Category.Type)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AllDayEvent)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDateTime)
+            <td class="event-start-date">
+                @item.StartDateTime.ToString("yyyy-MM-dd")
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDateTime)
+            <td class="event-end-date">
+                @item.EndDateTime.ToString("yyyy-MM-dd")
             </td>
-            <td>
+            <td  class="event-title">
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
