@@ -429,7 +429,7 @@ textarea {
 }
 
 
-/* Calendar card form styles
+/* Main Calendar styles
 -------------------------------------------------- */
 
 .calendar-header {
@@ -504,6 +504,8 @@ td.calendar-day {
   font-size: 14px;
   line-height: 20px;
   height: 100px;
+  max-height: 100px;
+  overflow: scroll;
   padding: 6px 8px;
 }
 
@@ -514,6 +516,17 @@ td.calendar-day {
   height: 22px;
   border-radius: 50%;
   background-color: #f85c6a;
+}
+
+.event-block {
+  width: fit-content;
+  margin: 3px;
+  margin-left: auto;
+}
+
+#calendar-navigator button.btn[type="submit"].go-button {
+  background-color: #f85c6a;
+  color: #ffffff;
 }
 
 /* Profile styles

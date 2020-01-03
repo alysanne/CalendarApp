@@ -20,15 +20,23 @@ namespace BucksCalendar.Pages.Calendar
         }
 
         public IList<Event> Event { get;set; }
+        
+        public string SelectedMonth { get; set; }
+        public string SelectedYear { get; set; }
 
         public async Task OnGetAsync(int? year, int? month)
         {
+            var transformMonth = month != null ? month + 1 : null;
+            
             var calendarYear = year ?? DateTime.Today.Year;
-            var calendarMonth = month ?? DateTime.Today.Month;
+            var calendarMonth = transformMonth ?? DateTime.Today.Month;
+            SelectedMonth = calendarMonth.ToString();
+            SelectedYear = calendarYear.ToString();
 
             /* Dates for query results delimitation */
             var firstDayMonth = new DateTime(calendarYear, calendarMonth, 1);
             var lastDayMonth = new DateTime(calendarYear, calendarMonth, DateTime.DaysInMonth(calendarYear, calendarMonth), 23, 59, 59);
+
             
             var query = from ev in _context.Events
                         where 
