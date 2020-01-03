@@ -429,6 +429,91 @@ textarea {
 }
 
 
+/* Calendar card form styles
+-------------------------------------------------- */
+
+.calendar-header {
+  display: flex;
+  width: 1100px;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+#calendar-navigator {
+  display: flex;
+  justify-content: space-between;
+}
+
+#calendar-navigator form {
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 4px;
+}
+
+#calendar-navigator button, #calendar-navigator label, #calendar-navigator a {
+  background-color: white;
+  border: 1px solid white;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  color: #212529;
+  margin: 0 2px;
+}
+
+#previous {
+  margin-left: 20px !important;
+}
+
+#add {
+  margin-right: 20px !important;
+  line-height: 23px;
+  font-size: 23px !important;
+  font-weight: lighter;
+  width: 40px;
+}
+
+#chosen-month {
+  font-size: 30px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+#chosen-year {
+  font-size: 30px;
+  font-weight: lighter;
+  margin-left: 5px;
+}
+
+table#calendar {
+  font-family: 'Raleway', sans-serif;
+  color: #212529;
+  table-layout: fixed;
+  border-top-color: transparent !important;
+  border-right-color: transparent;
+}
+
+#weekdays th {
+  font-weight: normal;
+  text-align: center;
+}
+
+.main-calendar-card {
+  width: 1200px;
+}
+
+td.calendar-day {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.current-day {
+  color: #ffffff;
+  text-align: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #f85c6a;
+}
+
 /* Profile styles
 -------------------------------------------------- */
 
