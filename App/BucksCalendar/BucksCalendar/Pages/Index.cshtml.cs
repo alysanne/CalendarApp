@@ -17,8 +17,9 @@ namespace BucksCalendar.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public RedirectToPageResult OnGet()
         {
+            return RedirectToPage("./Calendar/Index");
         }
     }
 }
