@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using BucksCalendar.Data;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using BucksCalendar.Services;
 
 namespace BucksCalendar
 {
@@ -35,6 +37,9 @@ namespace BucksCalendar
             
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(connectionStringBuilder.ConnectionString));
+            
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
