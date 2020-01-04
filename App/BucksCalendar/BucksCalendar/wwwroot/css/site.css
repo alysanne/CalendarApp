@@ -599,3 +599,7 @@ button.event-block:hover {
 .profile-content {
   margin-top: 20px;
 }
+
+#confirm-link {
+  color: #7eb9fc;
+}

@@ -1,0 +1,12 @@
+@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+<div class="container">
+    <h1 id="simple-page-title" class="mt-5 mb-5">@ViewData["Title"]</h1>
+    <h4 id="simple-page-subtitle">
+            Please check your email to confirm your account. Click <a id="confirm-link" asp-area="Identity" asp-page="/Account/Login">here</a> to login.
+    </h4>
+</div>
