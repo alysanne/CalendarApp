@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BucksCalendar.Data;
 using BucksCalendar.Models;
+using BucksCalendar.Utilities;
 using Microsoft.AspNetCore.Authorization;
 
 namespace BucksCalendar.Pages.Calendar
@@ -184,35 +185,8 @@ namespace BucksCalendar.Pages.Calendar
             {
                 Event.Location = Input.Location;
             }
-            
-            if (Event.Notification == null)
-            {
-                var notification = new Notification
-                {
-                    NotifyBySMS = Input.NotifyBySMS,
-                    NotifyByEmail = Input.NotifyByEmail,
-                    ScheduledFor = Input.ScheduledFor
-                };
 
-                Event.Notification = notification;
-            }
-            else
-            {
-                if (Input.NotifyBySMS != Event.Notification.NotifyBySMS)
-                {
-                    Event.Notification.NotifyBySMS = Input.NotifyBySMS;
-                }
-            
-                if (Input.NotifyByEmail != Event.Notification.NotifyByEmail)
-                {
-                    Event.Notification.NotifyByEmail = Input.NotifyByEmail;
-                }
-            
-                if (Input.ScheduledFor != Event.Notification.ScheduledFor)
-                {
-                    Event.Notification.ScheduledFor = Input.ScheduledFor;
-                }
-            }
+            EditEventHelpers.HandleNotifications(Event, Input);
 
             _context.Attach(Event).State = EntityState.Modified;
 
