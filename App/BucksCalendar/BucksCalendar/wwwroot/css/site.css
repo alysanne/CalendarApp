@@ -565,3 +565,11 @@ button.event-block:hover {
 #profile-image {
   width: 200px;
 }
+
+.nav-sidebar {
+  margin: auto;
+}
+
+.profile-content {
+  background-color: pink;
+}
