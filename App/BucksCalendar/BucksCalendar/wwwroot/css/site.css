@@ -576,7 +576,7 @@ button.event-block:hover {
   width: 500px;
 }
 
-#profile-form, #email-form {
+#profile-form, #email-form, #change-password-form {
   display: flex;
   flex-direction: column;
 }
