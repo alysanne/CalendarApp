@@ -36,5 +36,20 @@ namespace BucksCalendar.Utilities
                 }
             }
         }
+
+        public static void HandleDates(Event eventData, EditModel.EventInput input)
+        {
+            var startDateTime = input.StartDate.Date.Add(input.StartTime.TimeOfDay);
+            if (startDateTime != eventData.StartDateTime)
+            {
+                eventData.StartDateTime = startDateTime;
+            }
+            
+            var endDateTime = input.EndDate.Date.Add(input.EndTime.TimeOfDay);
+            if (endDateTime != eventData.EndDateTime)
+            {
+                eventData.EndDateTime = endDateTime;
+            }
+        }
     }
 }

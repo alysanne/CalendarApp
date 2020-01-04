@@ -158,18 +158,6 @@ namespace BucksCalendar.Pages.Calendar
             {
                 Event.AllDayEvent = Input.AllDayEvent;
             }
-
-            var startDateTime = Input.StartDate.Date.Add(Input.StartTime.TimeOfDay);
-            if (startDateTime != Event.StartDateTime)
-            {
-                Event.StartDateTime = startDateTime;
-            }
-            
-            var endDateTime = Input.EndDate.Date.Add(Input.EndTime.TimeOfDay);
-            if (endDateTime != Event.EndDateTime)
-            {
-                Event.EndDateTime = endDateTime;
-            }
             
             if (Input.Title != Event.Title)
             {
@@ -185,7 +173,8 @@ namespace BucksCalendar.Pages.Calendar
             {
                 Event.Location = Input.Location;
             }
-
+            
+            EditEventHelpers.HandleDates(Event, Input);
             EditEventHelpers.HandleNotifications(Event, Input);
 
             _context.Attach(Event).State = EntityState.Modified;
