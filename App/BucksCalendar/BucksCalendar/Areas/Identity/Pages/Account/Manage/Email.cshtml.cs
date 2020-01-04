@@ -44,8 +44,8 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "This field is required.")]
+            [EmailAddress(ErrorMessage = "Provide a valid email.")]
             [Display(Name = "New email")]
             public string NewEmail { get; set; }
         }
