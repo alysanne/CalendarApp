@@ -164,6 +164,19 @@ a, a:active {
   margin-left: 5px;
 }
 
+form #logout.btn[type="submit"] {
+   background-color: transparent;
+   color: rgba(255, 255, 255, 0.8);
+   font-family: 'Quicksand', sans-serif;
+   margin-left: 10px;
+   font-size: 18px;
+ }
+
+form #logout.btn[type="submit"]:hover {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 1) !important;
+}
+
 /* Form styles & Calendar card styles
 -------------------------------------------------- */
 
