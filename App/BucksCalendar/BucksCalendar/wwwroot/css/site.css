@@ -580,3 +580,9 @@ button.event-block:hover {
   display: flex;
   flex-direction: column;
 }
+
+#simple-page-title, #simple-page-subtitle {
+  color: #ffffff;
+  font-family: 'Quicksand', sans-serif;
+  text-align: center;
+}
