@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BucksCalendar.Data;
 using BucksCalendar.Models;
+using BucksCalendar.Utilities;
 using Microsoft.AspNetCore.Authorization;
 
 namespace BucksCalendar.Pages.Calendar
@@ -28,17 +29,14 @@ namespace BucksCalendar.Pages.Calendar
 
         public async Task OnGetAsync(int? year, int? month)
         {
-            var transformMonth = month != null ? month + 1 : null;
-            
-            var calendarYear = year ?? DateTime.Today.Year;
-            var calendarMonth = transformMonth ?? DateTime.Today.Month;
+            var calendarYear = DateHelpers.CalcNumericYear(year);
+            var calendarMonth = DateHelpers.CalcNumericMonth(month);
             SelectedMonth = calendarMonth.ToString();
             SelectedYear = calendarYear.ToString();
 
             /* Dates for query results delimitation */
-            var firstDayMonth = new DateTime(calendarYear, calendarMonth, 1);
-            var lastDayMonth = new DateTime(calendarYear, calendarMonth, DateTime.DaysInMonth(calendarYear, calendarMonth), 23, 59, 59);
-
+            var firstDayMonth = DateHelpers.FirstDayOfMonth(calendarYear, calendarMonth);
+            var lastDayMonth = DateHelpers.LastDayOfMonth(calendarYear, calendarMonth);
             
             var query = from ev in _context.Events
                         where 
