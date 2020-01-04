@@ -37,18 +37,14 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "This field is required.")]
             [DataType(DataType.Text)]
             [Display(Name = "Full name")]
             public string Name { get; set; }
-            
-            [Required]
-            [DataType(DataType.Text)]
-            [Display(Name = "Role")]
-            public string Role { get; set; }
 
             [Phone]
             [Display(Name = "Mobile phone")]
+            [RegularExpression(@"^07\d{9}$", ErrorMessage = "UK mobile with no spaces.")]
             [DataType(DataType.Text)]
             public string PhoneNumber { get; set; }
             
@@ -76,7 +72,6 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 Name = user.Name,
-                Role = user.Role,
                 PhoneNumber = phoneNumber
             };
         }
@@ -123,24 +118,22 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
                 user.Name = Input.Name;
             }
 
-            if (Input.Role != user.Role)
+            if (Input.Image != null)
             {
-                user.Role = Input.Role;
-            }
-
-            using (var memoryStream = new MemoryStream())
-            {
-                await Input.Image.CopyToAsync(memoryStream);
-
-                // Upload the file if less than 2 MB
-                if (memoryStream.Length < 2097152)
+                using (var memoryStream = new MemoryStream())
                 {
-                    user.Image = memoryStream.ToArray();
-                }
-                else
-                {
-                    StatusMessage = "Please upload a smaller image (max 2MB)";
-                    return RedirectToPage();
+                    await Input.Image.CopyToAsync(memoryStream);
+
+                    // Upload the file if less than 2 MB
+                    if (memoryStream.Length < 2097152)
+                    {
+                        user.Image = memoryStream.ToArray();
+                    }
+                    else
+                    {
+                        StatusMessage = "Please upload a smaller image (max 2MB)";
+                        return RedirectToPage();
+                    }
                 }
             }
 

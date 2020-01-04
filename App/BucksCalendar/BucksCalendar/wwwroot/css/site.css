@@ -564,12 +564,19 @@ button.event-block:hover {
 
 #profile-image {
   width: 200px;
+  border-radius: 50%;
+  margin: 15px;
 }
 
 .nav-sidebar {
   margin: auto;
 }
 
-.profile-content {
-  background-color: pink;
+.profile-form {
+  width: 500px;
+}
+
+#profile-form {
+  display: flex;
+  flex-direction: column;
 }
