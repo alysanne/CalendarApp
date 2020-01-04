@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BucksCalendar.Data;
 using BucksCalendar.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BucksCalendar.Pages.Calendar
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly BucksCalendar.Data.DatabaseContext _context;

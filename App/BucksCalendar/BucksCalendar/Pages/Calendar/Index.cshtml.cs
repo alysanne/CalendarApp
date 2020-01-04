@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BucksCalendar.Data;
 using BucksCalendar.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BucksCalendar.Pages.Calendar
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly BucksCalendar.Data.DatabaseContext _context;

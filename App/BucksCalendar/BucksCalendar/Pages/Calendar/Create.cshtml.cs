@@ -10,10 +10,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BucksCalendar.Data;
 using BucksCalendar.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 namespace BucksCalendar.Pages.Calendar
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly DatabaseContext _context;
