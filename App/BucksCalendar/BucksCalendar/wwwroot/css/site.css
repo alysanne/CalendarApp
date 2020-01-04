@@ -586,3 +586,16 @@ button.event-block:hover {
   font-family: 'Quicksand', sans-serif;
   text-align: center;
 }
+
+#manage-title, #manage-subtitle, .profile-content h4 {
+  color: #ffffff;
+  font-family: "Quicksand", sans-serif;
+}
+
+#manage-subtitle {
+  font-weight: lighter;
+}
+
+.profile-content {
+  margin-top: 20px;
+}
