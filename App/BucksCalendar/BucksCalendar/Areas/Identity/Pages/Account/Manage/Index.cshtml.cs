@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using BucksCalendar.Areas.Identity.Data;
+using BucksCalendar.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -58,17 +60,8 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
-
-            if (user.Image != null)
-            {
-                var base64Img = Convert.ToBase64String(user.Image);
-                ProfileImage = $"data:image/jpg;base64,{base64Img}";
-            }
-            else
-            {
-                ProfileImage = "/assets/img/user-default.png";
-            }
-
+            ProfileImage = user.Image == null ? "/assets/img/user-default.png" : ImageHandler.ToBase64ImgString(user.Image);
+            
             Input = new InputModel
             {
                 Name = user.Name,
@@ -120,20 +113,14 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
 
             if (Input.Image != null)
             {
-                using (var memoryStream = new MemoryStream())
+                try
                 {
-                    await Input.Image.CopyToAsync(memoryStream);
-
-                    // Upload the file if less than 2 MB
-                    if (memoryStream.Length < 2097152)
-                    {
-                        user.Image = memoryStream.ToArray();
-                    }
-                    else
-                    {
-                        StatusMessage = "Please upload a smaller image (max 2MB)";
-                        return RedirectToPage();
-                    }
+                    user.Image = await ImageHandler.ToMemoryStreamAsync(Input.Image);
+                }
+                catch (ImageFormatLimitationException e)
+                {
+                    StatusMessage = e.Message;
+                    return RedirectToPage();
                 }
             }
 
