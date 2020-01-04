@@ -524,6 +524,19 @@ td.calendar-day {
   margin-left: auto;
 }
 
+button.event-block {
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  padding: 2px 5px;
+  background: none;
+  border: none;
+}
+
+button.event-block:hover {
+  background-color: #eeeeee;
+  border-radius: 4px;
+}
+
 #calendar-navigator button.btn[type="submit"].go-button {
   background-color: #f85c6a;
   color: #ffffff;

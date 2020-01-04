@@ -5,8 +5,30 @@
     ViewData["Title"] = "Index";
 }
 
+<!-- Modal -->
+<div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="modal-details" class="btn btn-primary" data-dismiss="modal">Details</button>
+                <button type="button" id="modal-edit" class="btn btn-primary" data-dismiss="modal">Edit</button>
+                <button type="button" id="modal-delete" class="btn btn-danger" data-dismiss="modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="page-content">
     <div class="calendar-header">
+        <!-- Calendar page -->
         <h4 class="page-title">
             <span id="chosen-month"></span>
             <span id="chosen-year"></span>
@@ -68,27 +90,33 @@
     </div>
 </div>
 
-
+<!-- Event data -->
 <table class="table" hidden>
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Event[0].Category)
-            </th>
-            <th>
-                Start date
-            </th>
-            <th>
-                End date
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event[0].Title)
-            </th>
-        </tr>
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Event[0].Category)
+        </th>
+        <th>
+            Start date
+        </th>
+        <th>
+            End date
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Event[0].Title)
+        </th>
+    </tr>
     </thead>
     <tbody id="events">
-@foreach (var item in Model.Event) {
+    @foreach (var item in Model.Event) {
         <tr>
+            <td class="event-id">
+                @Html.DisplayFor(modelItem => item.EventID)
+            </td>
             <td class="event-category">
                 @Html.DisplayFor(modelItem => item.Category.Type)
             </td>
@@ -102,6 +130,6 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
