@@ -62,9 +62,16 @@ namespace BucksCalendar.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
-            
-            var base64Img = Convert.ToBase64String(user.Image);
-            ProfileImage = $"data:image/jpg;base64,{base64Img}";
+
+            if (user.Image != null)
+            {
+                var base64Img = Convert.ToBase64String(user.Image);
+                ProfileImage = $"data:image/jpg;base64,{base64Img}";
+            }
+            else
+            {
+                ProfileImage = "/assets/img/user-default.png";
+            }
 
             Input = new InputModel
             {
